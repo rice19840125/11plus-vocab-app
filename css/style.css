@@ -1,0 +1,368 @@
+:root {
+    --primary: #ff6b6b;
+    --secondary: #4ecdc4;
+    --accent: #ffe66d;
+    --background: #f7fff7;
+    --text: #2c3e50;
+    --card-bg: rgba(255, 255, 255, 0.9);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+#app {
+    background: var(--card-bg);
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.5);
+}
+
+header {
+    text-align: center;
+    padding: 30px 20px;
+    background: rgba(255,255,255,0.5);
+    border-bottom: 2px solid rgba(0,0,0,0.05);
+}
+
+h1 {
+    font-family: 'Comic Neue', cursive;
+    color: var(--primary);
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.05);
+}
+
+#day-selector-container {
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+select {
+    padding: 8px 16px;
+    font-family: 'Outfit';
+    font-size: 1rem;
+    border-radius: 20px;
+    border: 2px solid var(--secondary);
+    outline: none;
+    cursor: pointer;
+    background: white;
+}
+
+#progress-bar-container {
+    width: 80%;
+    height: 10px;
+    background: rgba(0,0,0,0.1);
+    border-radius: 10px;
+    margin: 0 auto 15px auto;
+    overflow: hidden;
+}
+
+#progress-bar {
+    height: 100%;
+    background: var(--secondary);
+    width: 0%;
+    transition: width 0.4s ease;
+}
+
+#part-title {
+    color: #34495e;
+    font-size: 1.5rem;
+}
+
+main {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 30px;
+    background: rgba(255,255,255,0.5);
+    border-top: 2px solid rgba(0,0,0,0.05);
+}
+
+.nav-btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-family: 'Outfit';
+}
+
+#prev-btn {
+    background: #ecf0f1;
+    color: #7f8c8d;
+}
+
+#next-btn {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+}
+
+.nav-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Part Specific Styles */
+
+/* Part 1: Story */
+.story-box {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border-left: 6px solid var(--secondary);
+}
+
+.story-box strong {
+    color: var(--primary);
+    background: rgba(255, 107, 107, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+/* Part 2: Vocab List */
+.vocab-card {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.vocab-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+.vocab-word {
+    font-size: 2rem;
+    color: var(--primary);
+    font-weight: 800;
+}
+.vocab-pronunciation {
+    color: #7f8c8d;
+    font-style: italic;
+}
+.vocab-meaning {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.vocab-tags {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+.tag {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+.tag.synonym { background: #d4edda; color: #155724; }
+.tag.antonym { background: #f8d7da; color: #721c24; }
+.vocab-sentences {
+    list-style-type: none;
+}
+.vocab-sentences li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+    color: #34495e;
+}
+.vocab-sentences li::before {
+    content: "👉";
+    position: absolute;
+    left: 0;
+    font-size: 0.9rem;
+}
+
+/* Match Games / Grids */
+.match-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+.match-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.match-item {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 600;
+    border: 3px solid transparent;
+    transition: all 0.2s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    user-select: none;
+}
+.match-item:hover {
+    transform: scale(1.02);
+}
+.match-item.selected {
+    border-color: var(--secondary);
+    background: #e0f7fa;
+}
+.match-item.correct {
+    border-color: #2ecc71;
+    background: #d5f5e3;
+    opacity: 0.7;
+    pointer-events: none;
+}
+.match-item.wrong {
+    border-color: var(--primary);
+    background: #fadbd8;
+    animation: shake 0.4s;
+}
+.emoji-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Writing Practice */
+.writing-row {
+    margin-bottom: 25px;
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.writing-word {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+.writing-inputs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.writing-input {
+    flex: 1;
+    min-width: 100px;
+    padding: 10px;
+    border: 2px dashed #bdc3c7;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.writing-input:focus {
+    border-color: var(--secondary);
+    border-style: solid;
+}
+.writing-input.success {
+    border-color: #2ecc71;
+    border-style: solid;
+    background: #eafaf1;
+}
+
+/* Make sentence */
+.sentence-input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #bdc3c7;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    resize: vertical;
+    min-height: 80px;
+    outline: none;
+}
+.sentence-input:focus {
+    border-color: var(--secondary);
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.success-message {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #2ecc71;
+    font-weight: 800;
+    margin-top: 20px;
+    display: none;
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Utils */
+.hidden { display: none !important; }
+
+/* Speak Button */
+.speak-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: transform 0.2s, opacity 0.2s;
+    opacity: 0.7;
+}
+.speak-btn:hover {
+    transform: scale(1.2);
+    opacity: 1;
+}
+
+.speak-btn-small {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-left: 5px;
+    padding: 0;
+    transition: transform 0.2s, opacity 0.2s;
+    opacity: 0.6;
+}
+.speak-btn-small:hover {
+    transform: scale(1.2);
+    opacity: 1;
+}
