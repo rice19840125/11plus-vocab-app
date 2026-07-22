@@ -222,9 +222,85 @@ function renderMakeSentence(data) {
         const input = document.createElement('textarea');
         input.className = 'sentence-input';
         input.placeholder = `Use "${w.word}" in a sentence...`;
+        
+        // Load saved sentence from localStorage
+        const storageKey = `sentence_${currentDay}_${w.word}`;
+        const savedSentence = localStorage.getItem(storageKey);
+        if (savedSentence) {
+            input.value = savedSentence;
+        }
+
+        // Save sentence to localStorage on input
+        input.addEventListener('input', (e) => {
+            localStorage.setItem(storageKey, e.target.value);
+        });
+
         row.appendChild(input);
         mainContent.appendChild(row);
     });
+
+    // Add Submit to Google Forms Button
+    const submitBtn = document.createElement('button');
+    submitBtn.textContent = "Submit Sentences 🚀";
+    submitBtn.style.marginTop = "20px";
+    submitBtn.style.width = "100%";
+    submitBtn.style.padding = "15px";
+    submitBtn.style.fontSize = "18px";
+    submitBtn.style.fontWeight = "bold";
+    submitBtn.style.backgroundColor = "#4CAF50";
+    submitBtn.style.color = "white";
+    submitBtn.style.border = "none";
+    submitBtn.style.borderRadius = "8px";
+    submitBtn.style.cursor = "pointer";
+    submitBtn.style.boxShadow = "0 4px 6px rgba(0,0,0,0.1)";
+    submitBtn.style.transition = "background-color 0.2s";
+
+    submitBtn.addEventListener('mouseover', () => submitBtn.style.backgroundColor = "#45a049");
+    submitBtn.addEventListener('mouseout', () => submitBtn.style.backgroundColor = "#4CAF50");
+
+    submitBtn.addEventListener('click', () => {
+        const inputs = mainContent.querySelectorAll('.sentence-input');
+        let submissionText = `[Day ${currentDay}] Part 7: Make a Sentence\n\n`;
+        inputs.forEach((input, index) => {
+            const word = data.words[index].word;
+            submissionText += `${index + 1}. ${word}: ${input.value}\n`;
+        });
+
+        const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSc5r-0ypv6i1peYeVFEqSiXUMtgyP1HzkMOxVz4OLHlGWATAA/formResponse';
+        const formData = new URLSearchParams();
+        formData.append('entry.574800456', submissionText);
+
+        // Change button state
+        submitBtn.textContent = "Submitting... ⏳";
+        submitBtn.disabled = true;
+
+        fetch(formUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: formData.toString()
+        }).then(() => {
+            submitBtn.textContent = "Success! Sentences saved. ✅";
+            submitBtn.style.backgroundColor = "#2E7D32";
+            setTimeout(() => {
+                submitBtn.textContent = "Submit Sentences 🚀";
+                submitBtn.style.backgroundColor = "#4CAF50";
+                submitBtn.disabled = false;
+            }, 3000);
+        }).catch((err) => {
+            submitBtn.textContent = "Error submitting ❌";
+            submitBtn.style.backgroundColor = "#d32f2f";
+            setTimeout(() => {
+                submitBtn.textContent = "Submit Sentences 🚀";
+                submitBtn.style.backgroundColor = "#4CAF50";
+                submitBtn.disabled = false;
+            }, 3000);
+        });
+    });
+
+    mainContent.appendChild(submitBtn);
 }
 
 function renderReviewMatch() {
