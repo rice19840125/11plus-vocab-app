@@ -266,9 +266,9 @@ function renderMakeSentence(data) {
             submissionText += `${index + 1}. ${word}: ${input.value}\n`;
         });
 
-        const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSc5r-0ypv6i1peYeVFEqSiXUMtgyP1HzkMOxVz4OLHlGWATAA/formResponse';
+        const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSf_-bQu1lagHOknc2BoI8lRwK9-pUzGDCnz9FOXZ4sL9vnQpw/formResponse';
         const formData = new URLSearchParams();
-        formData.append('entry.574800456', submissionText);
+        formData.append('entry.820079942', submissionText);
 
         // Change button state
         submitBtn.textContent = "Submitting... ⏳";
